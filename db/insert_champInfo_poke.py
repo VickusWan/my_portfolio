@@ -6,7 +6,7 @@ import csv
 
 import json
 import sys
-sys.path.append('../data_extractors')
+sys.path.append('data_extractors')
 import champ_info
 
 load_dotenv()
@@ -39,7 +39,7 @@ print("Values inserted successfully.")
 
 with psycopg2.connect(**db_params) as connection:
     with connection.cursor() as cursor:
-        with open('champ_pokes.csv', newline='') as csvfile:
+        with open('db/champ_pokes.csv', newline='') as csvfile:
             filereader = csv.reader(csvfile, delimiter=' ', quotechar='|')
             next(filereader)
             for row in filereader:
