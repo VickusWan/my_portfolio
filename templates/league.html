@@ -33,6 +33,10 @@
         random as possible, with each team with a probability to win of 50%. However, certain combinations of champions are likely to have
         synergistic effects, and others might have antagonistic effects.
     </p>
+
+    <h2> Instructions </h2>
+    <p> For each of the dropdown option, select the champion for each of the teammates and press submit to post the data into the backend. The 
+        data is sent into the serialized ML model, which outputs the predicted probabilities for a Victory. </p>
     
     <form method="post" action="/submit">
         <select name="dynamicDropdown" id="dynamicDropdown1" onchange="updateImage1()">
@@ -73,12 +77,16 @@
         <input type="submit" value="Submit">
     </form>
 
-    <div id="imageContainer" > 
+    <div id="imageContainer" >
+        {% if pics %}
         <img id="champImage1" src="/static/champion/{{ pics[0] }}"/>
         <img id="champImage2" src="/static/champion/{{ pics[1] }}"/>
         <img id="champImage3" src="/static/champion/{{ pics[2] }}"/>
         <img id="champImage4" src="/static/champion/{{ pics[3] }}"/>
         <img id="champImage5" src="/static/champion/{{ pics[4] }}"/>
+        {% else %}
+        
+        {% endif %}
     </div>
 </div>
     <br>
@@ -108,12 +116,17 @@
     </p>
     <h2>Data Pipeline:</h2>
     <p>
-        <li> Once the list of usable game_ids have been determined, then each game information is extracted using the game_id as parameter </li><br>
-        <li> The raw data is inserted into a postgresql database for further usage downstream </li><br>
-        <li> Since we only want to predict the probability of winning a game based on champion selection alone, we extract only the relevant features</li><br>
-        <li> Attached to each champion are auxiliary information that can be used for prediction, such as long-range abilities, crowd-control abilities, etc...</li><br>
-        <li> </li>
+        <li> Once the list of usable game_ids have been determined, then each game information is extracted using the game_id as parameter. </li><br>
+        <li> The raw data is inserted into a postgresql database for further usage downstream. </li><br>
+        <li> Since we only want to predict the probability of winning a game based on champion selection alone, we extract only the relevant features.</li><br>
+        <li> Attached to each champion are auxiliary information that can be used for prediction, such as long-range abilities, crowd-control abilities, etc...
+            We add these extra information into the postgresql database.
+        </li><br>
+        <li> With the final cleaned training dataset, we train ML models to find the highest accuracy. In this case, the Random Forest was tuned and selected. The final
+            model is serialized using Python's package pickle for usage in the frontend. 
+        </li><br>
     </p>
+
     </div>
     <img src="static/league_structure.png" alt="Descriptive Alt Text" class="full-width-image">
 
