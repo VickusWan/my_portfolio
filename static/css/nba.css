@@ -11,6 +11,12 @@ body {
     margin: auto;
 }
 
+h1 {
+    margin: 60px;
+}
+
 .description {
     margin: 45px;
+    margin-left: 120px;
+    margin-right: 120px;
 }

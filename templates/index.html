@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/nav-bar.css') }}">
     <link rel="icon" type="image/x-icon" href="/static/portfolio_favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <nav>
@@ -16,25 +17,38 @@
             <li><a href="connectfour">Connect Four</a></li>
         </ul>
     </nav>
-
-    <section id="about" class="about-section">
-        <div class="profile-pic">
-            <img src="" alt="">
-        </div>
-        <div class="about-content">
-            <h2>About Me</h2>
-            <p>This section will contain information about me.</p>
-        </div>
-    </section>
-
-    <section id="services">
-        <h2>Services</h2>
-        <p>Details about the services I offer.</p>
-    </section>
-
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>How you can reach me.</p>
-    </section>
+    <div id='parent-container'>
+        <section id="about" class="about-section">
+            <div class="profile-pic">
+                <img src="" alt="">
+            </div>
+            <div class="about-content">
+                <h2>Hi! My name is:</h2>
+                <h1> Victor Uong </h1>
+                <div class="social-links">
+                    <a href="your_instagram_profile_url" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="your_linkedin_profile_url" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="your_github_profile_url" target="_blank"><i class="fab fa-github"></i></a>
+                </div>
+                <p>I'm a graduate student in Business Analytics at San Francisco State University with a background in Chemical Engineering.
+                    I am an aspiring Data Scientist, and over 5+ years of experience working as an engineering (which includes working at Apple)!
+                    <br>
+                    <br>
+                    Here are some of my hobbies and interests:
+                </p>
+                <ul>
+                    <li>Tennis</li>
+                    <li>Basketball</li>
+                    <li>Running</li>
+                    <li>Film Photography</li>
+                    <li>Camping</li>
+                    <li>League of Legends</li>
+                </ul>
+                <p> Feel free to look at some of the Data Science related projects that I've worked on! The link to each project is in the 
+                    navigation bar. I've also attached a copy of my resume, and some of my photograph work! Thanks for stopping by!
+                </p>
+            </div>
+        </section>
+    </div>
 </body>
 </html>

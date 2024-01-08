@@ -2,6 +2,11 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background: url('/static/background.png');
+    background-size: cover; /* Covers the entire viewport */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Optional: keeps the image fixed during scroll */
+    background-position: center center;
 }
 
 section {
@@ -14,14 +19,25 @@ h1, h2 {
     color: #333;
 }
 
+#parent-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    min-height: 60vh;       /* Full viewport height */
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+
 .about-section {
     display: flex;
     align-items: center;
 }
 
 .profile-pic {
-    flex: 0 0 250px; /* Adjust size as needed */
-    height: 250px; /* Adjust size as needed */
+    flex: 0 0 350px; /* Adjust size as needed */
+    height: 350px; /* Adjust size as needed */
     margin-right: 60px;
     border-radius: 50%; /* Makes the image round */
     overflow: hidden;
@@ -37,4 +53,25 @@ h1, h2 {
 
 .about-content {
     flex: 1;
+}
+
+.social-links {
+    text-align: left; /* Center the icons */
+    margin-top: 5px; /* Spacing between the h1 and the social links */
+}
+
+.social-links a {
+    margin: 0 10px; /* Spacing between each icon */
+    color: #000; /* Icon color, change as needed */
+    font-size: 24px; /* Icon size, adjust as needed */
+}
+
+.social-links a:hover {
+    color: #007bff; /* Color change on hover, adjust as needed */
+}
+
+h1 {
+    font-size: 60px;
+    margin-top: 0%;
+    margin-bottom: 0%;
 }

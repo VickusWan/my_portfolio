@@ -18,8 +18,9 @@
             <li><a href="connectfour">Connect Four</a></li>
         </ul>
     </nav>
-    <div class='description'>
     <h1>ARAM Team Comp Prediction</h1>
+    <div class='description'>
+    
 
     <p> League of Legends is team-based game where players form a team of five and assume the role of a champion -
         characters with varying types of classes and unique abilities - and battle against another team of five players. 
@@ -38,6 +39,7 @@
     <p> For each of the dropdown option, select the champion for each of the teammates and press submit to post the data into the backend. The 
         data is sent into the serialized ML model, which outputs the predicted probabilities for a Victory. </p>
     
+    <div id='client-post'>
     <form method="post" action="/submit">
         <select name="dynamicDropdown" id="dynamicDropdown1" onchange="updateImage1()">
             <option value="" selected disabled>Select an option</option>
@@ -73,7 +75,6 @@
             <option value="{{ champ.image }}" {% if champ.image.split('.')[0] == champs[4] %}selected{% endif %}>{{ champ.champ_name }}</option>
             {% endfor %}
         </select>
-        <input type="text" name="summonername" placeholder="Enter player (Optional)">
         <input type="submit" value="Submit">
     </form>
 
@@ -88,6 +89,7 @@
 
         {% endif %}
     </div>
+    </div>
 </div>
 <br>
 <br>
@@ -99,8 +101,10 @@
         <h1 class="centered-header"> Probability of Winning: </h1>
         <h1 class="centered-header"> {{ value }} </h1>
     </div>
-    <div class='description'>
+
     <h1>How it works:</h1>
+
+    <div class='description'>
     <h2>Data Scraping:</h2>
     <p>
         <li> The data used in this project were extracted from the RIOT API, which gives basic information about users and games. To scrape usable game data for 
