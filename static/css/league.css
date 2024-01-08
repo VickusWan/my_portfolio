@@ -2,6 +2,11 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background: url('/static/background.png');
+    background-size: cover; /* Covers the entire viewport */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Optional: keeps the image fixed during scroll */
+    background-position: center center;
 }
 
 h1 {

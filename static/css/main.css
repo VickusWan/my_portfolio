@@ -57,7 +57,7 @@ h1, h2 {
 
 .social-links {
     text-align: left; /* Center the icons */
-    margin-top: 5px; /* Spacing between the h1 and the social links */
+    margin-top: 15px; /* Spacing between the h1 and the social links */
 }
 
 .social-links a {

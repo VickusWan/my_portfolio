@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+
+    background: url('/static/background.png');
+    background-size: cover; /* Covers the entire viewport */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-attachment: fixed; /* Optional: keeps the image fixed during scroll */
+    background-position: center center;
+    text-align: center;
+}
+
+.photo-container {
+    margin-top: 20px;
+    margin-bottom: 50px; /* Space between each photo container */
+}
+
+.photo {
+    max-width: 80%; /* Modify as needed */
+    max-height: 600px; /* Modify as needed */
+    border: 10px solid #333; /* Thick border, change color as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for depth */
+    margin-bottom: 0px; /* Space between image and caption */
+}
+
+.caption {
+    font-size: 20px; /* Adjust caption size as needed */
+    color: #333; /* Caption text color */
+}

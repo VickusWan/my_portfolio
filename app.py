@@ -39,6 +39,10 @@ def nba():
 def connectfour():
     return render_template('connectfour.html')
 
+@app.route('/photos')
+def photos():
+    return render_template('photos.html')
+
 @app.route('/submit', methods=['POST'])
 def handle_submit():
     selected_value = request.form

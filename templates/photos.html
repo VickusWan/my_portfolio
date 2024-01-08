@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Film Photography</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/photos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav-bar.css') }}">
+    <link rel="icon" type="image/x-icon" href="/static/camera_favicon.png">
+</head>
+<body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="home">Home</a></li>
+            <li><a href="static/victoruongresume.pdf">Resume</a></li>
+            <li><a href="league">League</a></li>
+            <li><a href="nba">Fantasy NBA</a></li>
+            <li><a href="connectfour">Connect Four</a></li>
+            <li><a href="photos">Photography</a></li>
+        </ul>
+    </nav>
+    <div class="photo-container">
+        <img src="static/photography/0.jpg" alt="Description of the photo" class="photo">
+        <p class="caption">San Francisco - Mission Dolores</p>
+    </div>
+
+    <div class="photo-container">
+        <img src="static/photography/1.jpg" alt="Description of the photo" class="photo">
+        <p class="caption">Vancouver - Waterfront</p>
+    </div>
+
+    <div class="photo-container">
+        <img src="static/photography/2.jpg" alt="Description of the photo" class="photo">
+        <p class="caption">San Francisco - Bay Bridge</p>
+    </div>
+
+    <div class="photo-container">
+        <img src="static/photography/3.jpg" alt="Description of the photo" class="photo">
+        <p class="caption">San Francisco - Golden Gate Bridge</p>
+    </div>
+
+    <div class="photo-container">
+        <img src="static/photography/4.jpg" alt="Description of the photo" class="photo">
+        <p class="caption">Santa Cruz - SC Beach</p>
+    </div>
+</body>
+</html>
