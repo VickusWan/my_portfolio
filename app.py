@@ -35,6 +35,10 @@ def league():
 def nba():
     return render_template('nba.html')
 
+@app.route('/connectfour')
+def connectfour():
+    return render_template('connectfour.html')
+
 @app.route('/submit', methods=['POST'])
 def handle_submit():
     selected_value = request.form

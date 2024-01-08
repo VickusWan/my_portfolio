@@ -20,12 +20,14 @@ h1, h2 {
 }
 
 .profile-pic {
-    flex: 0 0 150px; /* Adjust size as needed */
-    height: 150px; /* Adjust size as needed */
-    margin-right: 20px;
+    flex: 0 0 250px; /* Adjust size as needed */
+    height: 250px; /* Adjust size as needed */
+    margin-right: 60px;
     border-radius: 50%; /* Makes the image round */
     overflow: hidden;
-    background: #333;
+    background: url('/static/profilepic.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 .profile-pic img {

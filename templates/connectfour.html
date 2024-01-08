@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connect Four</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/connectfour.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/nav-bar.css') }}">
+<link rel="icon" type="image/x-icon" href="/static/connect-four_favicon.png">
+</head>
+<body>
+
+<div class="connect-four-board">
+    <!-- Generate 6 rows with 7 columns each -->
+    {% for row in range(5, -1, -1) %}
+    <div class="row">
+        {% for col in range(7) %}
+        <div class="cell" data-row="{{ row }}" data-col="{{ col }}"></div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    
+</div>
+</body>
+</html>

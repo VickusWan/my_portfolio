@@ -10,3 +10,7 @@ body {
     display: block; /* Prevents any unwanted space around the image */
     margin: auto;
 }
+
+.description {
+    margin: 45px;
+}
