@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/league.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav-bar.css') }}">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <title>ARAM Simulator</title>
+</head>
+<body>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="home">Home</a></li>
+            <li><a href="static/victoruongresume.pdf">Resume</a></li>
+            <li><a href="league">League</a></li>
+            <li><a href="nba">Fantasy NBA</a></li>
+            <li><a href="#contact">Connect Four</a></li>
+        </ul>
+    </nav>
+    <div class='description'>
+    <h1>ARAM Team Comp Prediction</h1>
+
+    <p> League of Legends is team-based game where players form a team of five and assume the role of a champion -
+        characters with varying types of classes and unique abilities - and battle against another team of five players. 
+        ARAM (All Random, All Mid) is a special game mode where the game randomly assigns champions to each player instead of the 
+        player selecting his own. 
+        <br><br>
+        As mentioned, in the game lobby, each player starts with a randomly assigned champion, but is able to re-roll in order to obtain
+        a new champion (the previous champion can be re-selected).
+        <br><br>
+        Thus, the goal of this app is to predict the best combination of champions that would lead to a win. The game client attempts to make as 
+        random as possible, with each team with a probability to win of 50%. However, certain combinations of champions are likely to have
+        synergistic effects, and others might have antagonistic effects.
+    </p>
+    
+    <form method="post" action="/submit">
+        <select name="dynamicDropdown" id="dynamicDropdown1" onchange="updateImage1()">
+            <option value="" selected disabled>Select an option</option>
+            {% for champ in data %}
+                <option value="{{ champ.image }}" {% if champ.image.split('.')[0] == champs[0] %}selected{% endif %}>{{ champ.champ_name }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="dynamicDropdown" id="dynamicDropdown2" onchange="updateImage2()">
+            <option value="" selected disabled>Select an option</option>
+            {% for champ in data %}
+            <option value="{{ champ.image }}" {% if champ.image.split('.')[0] == champs[1] %}selected{% endif %}>{{ champ.champ_name }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="dynamicDropdown" id="dynamicDropdown3" onchange="updateImage3()">
+            <option value="" selected disabled>Select an option</option>
+            {% for champ in data %}
+            <option value="{{ champ.image }}" {% if champ.image.split('.')[0] == champs[2] %}selected{% endif %}>{{ champ.champ_name }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="dynamicDropdown" id="dynamicDropdown4" onchange="updateImage4()">
+            <option value="" selected disabled>Select an option</option>
+            {% for champ in data %}
+            <option value="{{ champ.image }}" {% if champ.image.split('.')[0] == champs[3] %}selected{% endif %}>{{ champ.champ_name }}</option>
+            {% endfor %}
+        </select>
+
+        <select name="dynamicDropdown" id="dynamicDropdown5" onchange="updateImage5()">
+            <option value="" selected disabled>Select an option</option>
+            {% for champ in data %}
+            <option value="{{ champ.image }}" {% if champ.image.split('.')[0] == champs[4] %}selected{% endif %}>{{ champ.champ_name }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="summonername" placeholder="Enter player (Optional)">
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="imageContainer" > 
+        <img id="champImage1" src="/static/champion/{{ pics[0] }}"/>
+        <img id="champImage2" src="/static/champion/{{ pics[1] }}"/>
+        <img id="champImage3" src="/static/champion/{{ pics[2] }}"/>
+        <img id="champImage4" src="/static/champion/{{ pics[3] }}"/>
+        <img id="champImage5" src="/static/champion/{{ pics[4] }}"/>
+    </div>
+</div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="predictions"> 
+        <h1 class="centered-header"> Probability of Winning: </h1>
+        <h1 class="centered-header"> {{ value }} </h1>
+    </div>
+    <div class='description'>
+    <h1>How it works:</h1>
+    <h2>Data Scraping:</h2>
+    <p>
+        <li> The data used in this project were extracted from the RIOT API, which gives basic information about users and games. To scrape usable game data for 
+        the ML model, we first need to extract a list of player usernames, then extract their game history, and finally filter to data only for 
+        ARAM match mode. </li>
+        <br>
+        <li> The RIOT API allows a request rate of 100 requests per 2 mins, and in total, over 35,000 ARAM games were extracted. </li>
+    </p>
+    <h2>Data Pipeline:</h2>
+    <p>
+        <li> Once the list of usable game_ids have been determined, then each game information is extracted using the game_id as parameter </li><br>
+        <li> The raw data is inserted into a postgresql database for further usage downstream </li><br>
+        <li> Since we only want to predict the probability of winning a game based on champion selection alone, we extract only the relevant features</li><br>
+        <li> Attached to each champion are auxiliary information that can be used for prediction, such as long-range abilities, crowd-control abilities, etc...</li><br>
+        <li> </li>
+    </p>
+    </div>
+    <img src="static/league_structure.png" alt="Descriptive Alt Text" class="full-width-image">
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>

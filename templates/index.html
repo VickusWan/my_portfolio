@@ -1,80 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <title>ARAM Simulator</title>
+    <title>Victor Uong's Portfolio</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nav-bar.css') }}">
 </head>
 <body>
-    <h1>ARAM Team Comp Prediction</h1>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="home">Home</a></li>
+            <li><a href="static/victoruongresume.pdf">Resume</a></li>
+            <li><a href="league">League</a></li>
+            <li><a href="nba">Fantasy NBA</a></li>
+            <li><a href="#contact">Connect Four</a></li>
+        </ul>
+    </nav>
 
-    <form method="post" action="/submit">
-        <select name="dynamicDropdown" id="dynamicDropdown1" onchange="updateImage1()">
-            <option value="" selected disabled>Select an option</option>
-            {% for champ in data %}
-                <option value="{{ champ.image }}" {% if champ.image.split('.')[0] == champs[0] %}selected{% endif %}>{{ champ.champ_name }}</option>
-            {% endfor %}
-        </select>
+    <section id="home">
+        <h1>Welcome to My Personal Website</h1>
+        <p>This is a placeholder for some introductory content.</p>
+    </section>
 
-        <select name="dynamicDropdown" id="dynamicDropdown2" onchange="updateImage2()">
-            <option value="" selected disabled>Select an option</option>
-            {% for champ in data %}
-            <option value="{{ champ.image }}" {% if champ.image.split('.')[0] == champs[1] %}selected{% endif %}>{{ champ.champ_name }}</option>
-            {% endfor %}
-        </select>
+    <section id="about" class="about-section">
+        <div class="profile-pic">
+            <img src="path_to_your_image.jpg" alt="Your Name">
+        </div>
+        <div class="about-content">
+            <h2>About Me</h2>
+            <p>This section will contain information about me.</p>
+        </div>
+    </section>
 
-        <select name="dynamicDropdown" id="dynamicDropdown3" onchange="updateImage3()">
-            <option value="" selected disabled>Select an option</option>
-            {% for champ in data %}
-            <option value="{{ champ.image }}" {% if champ.image.split('.')[0] == champs[2] %}selected{% endif %}>{{ champ.champ_name }}</option>
-            {% endfor %}
-        </select>
+    <section id="services">
+        <h2>Services</h2>
+        <p>Details about the services I offer.</p>
+    </section>
 
-        <select name="dynamicDropdown" id="dynamicDropdown4" onchange="updateImage4()">
-            <option value="" selected disabled>Select an option</option>
-            {% for champ in data %}
-            <option value="{{ champ.image }}" {% if champ.image.split('.')[0] == champs[3] %}selected{% endif %}>{{ champ.champ_name }}</option>
-            {% endfor %}
-        </select>
-
-        <select name="dynamicDropdown" id="dynamicDropdown5" onchange="updateImage5()">
-            <option value="" selected disabled>Select an option</option>
-            {% for champ in data %}
-            <option value="{{ champ.image }}" {% if champ.image.split('.')[0] == champs[4] %}selected{% endif %}>{{ champ.champ_name }}</option>
-            {% endfor %}
-        </select>
-        <input type="text" name="summonername" placeholder="Enter player (Optional)">
-        <input type="submit" value="Submit">
-    </form>
-
-    <div id="imageContainer" > 
-        <img id="champImage1" src="/static/champion/{{ pics[0] }}"/>
-        <img id="champImage2" src="/static/champion/{{ pics[1] }}"/>
-        <img id="champImage3" src="/static/champion/{{ pics[2] }}"/>
-        <img id="champImage4" src="/static/champion/{{ pics[3] }}"/>
-        <img id="champImage5" src="/static/champion/{{ pics[4] }}"/>
-    </div>
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <div id="predictions"> 
-        <h1 class="centered-header"> Probability of Winning: </h1>
-        <h1 class="centered-header"> {{ value }} </h1>
-    </div>
-
-     
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>How you can reach me.</p>
+    </section>
 </body>
 </html>

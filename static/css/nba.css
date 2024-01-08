@@ -1,0 +1,12 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.full-width-image {
+    width: 80%;    /* Makes the image take up the full width of the screen */
+    height: auto;   /* Scales the height according to the aspect ratio */
+    display: block; /* Prevents any unwanted space around the image */
+    margin: auto;
+}

@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.about-section {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    flex: 0 0 150px; /* Adjust size as needed */
+    height: 150px; /* Adjust size as needed */
+    margin-right: 20px;
+    border-radius: 50%; /* Makes the image round */
+    overflow: hidden;
+    background: #333;
+}
+
+.profile-pic img {
+    width: 100%;
+    height: auto;
+}
+
+.about-content {
+    flex: 1;
+}

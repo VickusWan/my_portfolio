@@ -1,3 +1,20 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.description {
+    margin: 45px;
+}
+
+.full-width-image {
+    width: 60%;    /* Makes the image take up the full width of the screen */
+    height: auto;   /* Scales the height according to the aspect ratio */
+    display: block; /* Prevents any unwanted space around the image */
+    margin: auto;
+}
+
 #imageContainer {
     position: relative;
 }

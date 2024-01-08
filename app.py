@@ -20,21 +20,28 @@ db.init_app(app)
 
 @app.route('/')
 def index():
+    return render_template('index.html')
+
+@app.route('/home')
+def home():
+    return render_template('index.html')
+
+@app.route('/league')
+def league():
     champ_data = champinfo.query.with_entities(champinfo.champ_name, champinfo.image).all()
-    return render_template('index.html', data=champ_data, value = '---', pics=None, champs=None)
+    return render_template('league.html', data=champ_data, value = '---', pics=None, champs=None)
+
+@app.route('/nba')
+def nba():
+    return render_template('nba.html')
 
 @app.route('/submit', methods=['POST'])
 def handle_submit():
     selected_value = request.form
-    print(selected_value)
-    
     png_files = selected_value.getlist('dynamicDropdown')
-    summonerName = selected_value.getlist('summonername')
-    print(png_files)
-    print('what is this', summonerName)
+    #summonerName = selected_value.getlist('summonername')
     
     champ_data = champinfo.query.with_entities(champinfo.champ_name, champinfo.image).all()
-    
     final_values = [i.replace('.png', '') for i in png_files]
     
     for i in range(len(final_values)):
@@ -57,7 +64,7 @@ def handle_submit():
     
     win_pct = model.predict_proba(data)
 
-    return render_template('index.html', data=champ_data, value = str(round(win_pct[0][1], 3)), pics=png_files, champs=final_values)
+    return render_template('league.html', data=champ_data, value = str(round(win_pct[0][1], 3)), pics=png_files, champs=final_values)
 
 if __name__ == "__main__":
     app.run(debug=True)
