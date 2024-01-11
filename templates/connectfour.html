@@ -7,19 +7,90 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/connectfour.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/nav-bar.css') }}">
 <link rel="icon" type="image/x-icon" href="/static/connect-four_favicon.png">
+
+<link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+<script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+<script type="module">
+    const loading = document.getElementById('loading');
+    addEventListener('py:ready', () => loading.close());
+    loading.showModal();
+</script>
 </head>
 <body>
+    <dialog id="loading">
+        <h1>Loading AI ...</h1>
+    </dialog>
+    <py-script src="./static/connectfour.py" config="./static/pyscript.json"> </py-script>|
+    <section class="pyscript">
+        <button id="row0" class="play-move" py-click="GAME.insert0">Here</button>
+        <button id="row1" class="play-move" py-click="GAME.insert1">Here</button>
+        <button id="row2" class="play-move" py-click="GAME.insert2">Here</button>
+        <button id="row3" class="play-move" py-click="GAME.insert3">Here</button>
+        <button id="row4" class="play-move" py-click="GAME.insert4">Here</button>
+        <button id="row5" class="play-move" py-click="GAME.insert5">Here</button>
+        <button id="row6" class="play-move" py-click="GAME.insert6">Here</button>
+        <table id="connectFour">
+            <tr>
+                <td id="cell00" class="rounds"><div data-x="0" data-y="0" class="cell" py-click="GAME.click" ></div></td>
+                <td id="cell01" class="rounds"><div data-x="0" data-y="1" class="cell" py-click="GAME.click" ></div></td>
+                <td id="cell02" class="rounds"><div data-x="0" data-y="2" class="cell" py-click="GAME.click" ></div></td>
+                <td id="cell03" class="rounds"><div data-x="0" data-y="3" class="cell" py-click="GAME.click" ></div></td>
+                <td id="cell04" class="rounds"><div data-x="0" data-y="4" class="cell" py-click="GAME.click" ></div></td>
+                <td id="cell05" class="rounds"><div data-x="0" data-y="5" class="cell" py-click="GAME.click" ></div></td>
+                <td id="cell06" class="rounds"><div data-x="0" data-y="6" class="cell" py-click="GAME.click" ></div></td>
+            </tr>
+            
+            <tr>
+                <td id="cell10" class="rounds"><div data-x="1" data-y="0" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell11" class="rounds"><div data-x="1" data-y="1" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell12" class="rounds"><div data-x="1" data-y="2" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell13" class="rounds"><div data-x="1" data-y="3" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell14" class="rounds"><div data-x="1" data-y="4" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell15" class="rounds"><div data-x="1" data-y="5" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell16" class="rounds"><div data-x="1" data-y="6" class="cell" py-click="GAME.click"></div></td>
+            </tr>
 
-<div class="connect-four-board">
-    <!-- Generate 6 rows with 7 columns each -->
-    {% for row in range(5, -1, -1) %}
-    <div class="row">
-        {% for col in range(7) %}
-        <div class="cell" data-row="{{ row }}" data-col="{{ col }}"></div>
-        {% endfor %}
-    </div>
-    {% endfor %}
-    
-</div>
+            <tr>
+                <td id="cell20" class="rounds"><div data-x="2" data-y="0" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell21" class="rounds"><div data-x="2" data-y="1" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell22" class="rounds"><div data-x="2" data-y="2" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell23" class="rounds"><div data-x="2" data-y="3" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell24" class="rounds"><div data-x="2" data-y="4" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell25" class="rounds"><div data-x="2" data-y="5" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell26" class="rounds"><div data-x="2" data-y="6" class="cell" py-click="GAME.click"></div></td>
+            </tr>
+            <tr>
+                <td id="cell30" class="rounds"><div data-x="3" data-y="0" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell31" class="rounds"><div data-x="3" data-y="1" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell32" class="rounds"><div data-x="3" data-y="2" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell33" class="rounds"><div data-x="3" data-y="3" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell34" class="rounds"><div data-x="3" data-y="4" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell35" class="rounds"><div data-x="3" data-y="5" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell36" class="rounds"><div data-x="3" data-y="6" class="cell" py-click="GAME.click"></div></td>
+            </tr>
+            <tr>
+                <td id="cell40" class="rounds"><div data-x="4" data-y="0" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell41" class="rounds"><div data-x="4" data-y="1" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell42" class="rounds"><div data-x="4" data-y="2" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell43" class="rounds"><div data-x="4" data-y="3" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell44" class="rounds"><div data-x="4" data-y="4" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell45" class="rounds"><div data-x="4" data-y="5" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell46" class="rounds"><div data-x="4" data-y="6" class="cell" py-click="GAME.click"></div></td>
+            </tr>
+
+            <tr>
+                <td id="cell50" class="rounds"><div data-x="5" data-y="0" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell51" class="rounds"><div data-x="5" data-y="1" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell52" class="rounds"><div data-x="5" data-y="2" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell53" class="rounds"><div data-x="5" data-y="3" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell54" class="rounds"><div data-x="5" data-y="4" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell55" class="rounds"><div data-x="5" data-y="5" class="cell" py-click="GAME.click"></div></td>
+                <td id="cell56" class="rounds"><div data-x="5" data-y="6" class="cell" py-click="GAME.click"></div></td>
+            </tr>
+        </table>
+
+        
+
+    </section>
 </body>
 </html>
