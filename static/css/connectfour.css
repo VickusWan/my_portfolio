@@ -1,14 +1,58 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
     background: url('/static/background.png');
     background-size: cover; /* Covers the entire viewport */
     background-repeat: no-repeat; /* Prevents the image from repeating */
     background-attachment: fixed; /* Optional: keeps the image fixed during scroll */
     background-position: center center;
+}
+
+section {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
     margin: 0;
+}
+
+
+nav {
+    margin-top: -19px;
+}
+
+.navbar {
+    background-color: #333; /* Dark background color */
+    overflow: hidden; /* Clear floats */
+}
+
+.navbar .nav-links {
+    list-style: none; /* Remove bullets */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Align nav items in a row */
+}
+
+.navbar .nav-links li {
+    float: left;
+}
+
+.navbar .nav-links li a {
+    display: block;
+    color: white; /* Text color */
+    text-align: center;
+    padding: 14px 16px; /* Padding for nav items */
+    text-decoration: none; /* Remove underline from links */
+}
+
+/* Change the color of links on hover */
+.navbar .nav-links li a:hover {
+    background-color: #ddd;
+    color: black;
 }
 
 #connectFour {
@@ -33,6 +77,12 @@ td {
     width: 52px;
 }
 
-#cell53 {
-    background-color: yellow;
+h1 {
+    margin: 60px;
+}
+
+.description {
+    margin: 45px;
+    margin-left: 120px;
+    margin-right: 120px;
 }

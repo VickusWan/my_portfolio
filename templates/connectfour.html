@@ -21,14 +21,43 @@
         <h1>Loading AI ...</h1>
     </dialog>
     <py-script src="./static/connectfour.py" config="./static/pyscript.json"> </py-script>|
+    <nav>
+        <ul class="nav-links">
+            <li><a href="home">Home</a></li>
+            <li><a href="static/victoruongresume.pdf">Resume</a></li>
+            <li><a href="league">League</a></li>
+            <li><a href="nba">Fantasy NBA</a></li>
+            <li><a href="../connectfour">Connect Four</a></li>
+            <li><a href="photos">Photography</a></li>
+        </ul>
+    </nav>
+
+    <h1>Connect 4 with Adversirial AI</h1>
+    <div class='description'>
+
+    <p> Connect 4 is a classic game 2-player game, where players alternate dropping their checkers in each individual column. 
+        The first player to make 4 in a line (either horizontally, vertically or diagonally) wins the game!. The game is over when either you or
+        your opponent get 4 in a row, or there are no longer available moves to play. When a new game is started, the opposing player gets to start.
+    </p>
+    <h2> AI Opponent</h2>
+    <p> The foundation of the AI bot behind the opponent is a Alpha-beta pruning Algorithm that is built on top of the Minimax algorithm. The Minimax
+        algorithm explores every possible moves until it reaches a terminal node or a terminal state where Evaluation Functions are used to compute
+        the score of each player for a specific board position. Given enough computation power, the best Minimax Algorithm would reach until the end
+        of the game, and then select the best winning option everytime. However, with each iteration, the amount of computation that the algorithm
+        would have to do is 7^n (over 4 trillion moves). Thus, instead, the algorithm will look 4 steps ahead, and then use heuristic Functions
+        to calculate the score of each player 4 steps ahead, and pick the best move.
+    </p>
+</div>
     <section class="pyscript">
-        <button id="row0" class="play-move" py-click="GAME.insert0">Here</button>
-        <button id="row1" class="play-move" py-click="GAME.insert1">Here</button>
-        <button id="row2" class="play-move" py-click="GAME.insert2">Here</button>
-        <button id="row3" class="play-move" py-click="GAME.insert3">Here</button>
-        <button id="row4" class="play-move" py-click="GAME.insert4">Here</button>
-        <button id="row5" class="play-move" py-click="GAME.insert5">Here</button>
-        <button id="row6" class="play-move" py-click="GAME.insert6">Here</button>
+        <div id="insert-buttons">
+            <button id="row0" class="play-move" py-click="GAME.insert0">Here</button>
+            <button id="row1" class="play-move" py-click="GAME.insert1">Here</button>
+            <button id="row2" class="play-move" py-click="GAME.insert2">Here</button>
+            <button id="row3" class="play-move" py-click="GAME.insert3">Here</button>
+            <button id="row4" class="play-move" py-click="GAME.insert4">Here</button>
+            <button id="row5" class="play-move" py-click="GAME.insert5">Here</button>
+            <button id="row6" class="play-move" py-click="GAME.insert6">Here</button>
+        </div>
         <table id="connectFour">
             <tr>
                 <td id="cell00" class="rounds"><div data-x="0" data-y="0" class="cell" py-click="GAME.click" ></div></td>
@@ -88,8 +117,12 @@
                 <td id="cell56" class="rounds"><div data-x="5" data-y="6" class="cell" py-click="GAME.click"></div></td>
             </tr>
         </table>
-
-        
+        <div id="insert-buttons">
+            <button id="myself" class="play-move" py-click="GAME.me_first">Me First</button>
+            <button id="ai" class="play-move" py-click="GAME.ai_first">AI First</button>
+            <button id="newgame" class="play-move" py-click="GAME.newgame">New Game</button>
+        </div>
+        <h1 id='winner'>  </h1>
 
     </section>
 </body>
