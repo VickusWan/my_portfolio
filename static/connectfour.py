@@ -8,7 +8,11 @@ class connect4_board():
         self.num_rows = 6
         self.num_cols = 7
         self.board = np.zeros((self.num_rows, self.num_cols), dtype=int)
-        
+        self.user_starts = None
+    
+    def is_empty_board(self):
+        return np.all(self.board == 0)
+    
     def get_state(self):
         return self.board
         
@@ -33,18 +37,6 @@ class connect4_board():
         new_instance = connect4_board()
         new_instance.board = np.copy(self.board)
         return new_instance
-    
-    # def check_winner(self):
-    #     plus_score = heuristic(self, +1)
-    #     minus_score = heuristic(self, -1)
-    #     if plus_score == 10000:
-    #         document.getElementById('winner').innerText = 'AI wins!'
-    #         return True
-    #     elif minus_score == -10000:
-    #         document.getElementById('winner').innerText = 'Player wins!'
-    #         return True
-    #     else:
-    #         return False
         
         
     def check_winner(self, game, player):
@@ -74,18 +66,19 @@ class connect4_board():
                     return True
         return False    
         
-    
-        
     def me_first(self, event):
+        self.user_starts = True
         return
     
     def ai_first(self, event):
-        (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True)
+        self.user_starts = False
+        (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True, 1)
         row = self.play_move(1, col)
         ai_location = 'cell'+str(row)+str(col)
-        document.getElementById(ai_location).style.backgroundColor = 'yellow'
+        document.getElementById(ai_location).style.backgroundColor = 'red'
     
     def newgame(self, event):
+        self.user_starts = None
         self.board = np.zeros((self.num_rows, self.num_cols), dtype=int)
         for i in range(6):
             for j in range(7):
@@ -95,145 +88,279 @@ class connect4_board():
         return      
         
     def insert0(self, event):
-        if self.check_winner(self, 1):
-            document.getElementById('winner').innerText = 'AI wins!'
+        if self.user_starts is None:
             return
-        elif self.check_winner(self, -1):
+        
+        if self.user_starts:
+            player = 1
+        else:
+            player = -1
+        
+        if self.check_winner(self, 1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'Player wins!'
             return
-        row = self.play_move(-1, 0)
-        location = 'cell'+str(row)+'0'
-        document.getElementById(location).style.backgroundColor = 'red'
-        
-        (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True)
-        row = self.play_move(1, col)
-        ai_location = 'cell'+str(row)+str(col)
-        document.getElementById(ai_location).style.backgroundColor = 'yellow'
-        print(col, score)
-        if self.check_winner(self, 1):
+        elif self.check_winner(self, -1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'Player wins!'
+            return
+        elif self.check_winner(self, -1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'AI wins!'
+            return
+        elif self.check_winner(self, 1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'AI wins!'
+            return
+        
+        row = self.play_move(player, 0)
+        location = 'cell'+str(row)+'0'
+        document.getElementById(location).style.backgroundColor = 'yellow'
+        
+        if self.user_starts:
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), False, -1)
+            row = self.play_move(-1, col)
+        else: 
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True, 1)
+            row = self.play_move(1, col)
+        
+        ai_location = 'cell'+str(row)+str(col)
+        document.getElementById(ai_location).style.backgroundColor = 'red'
+        if self.check_winner(self, player):
+            document.getElementById('winner').innerText = 'Player wins!'
             return
         
     def insert1(self, event):
-        if self.check_winner(self, 1):
-            document.getElementById('winner').innerText = 'AI wins!'
+        if self.user_starts is None:
             return
-        elif self.check_winner(self, -1):
+        
+        if self.user_starts:
+            player = 1
+        else:
+            player = -1
+        
+        if self.check_winner(self, 1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'Player wins!'
             return
-        row = self.play_move(-1, 1)
-        location = 'cell'+str(row)+'1'
-        document.getElementById(location).style.backgroundColor = 'red'
-        
-        (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True)
-        row = self.play_move(1, col)
-        ai_location = 'cell'+str(row)+str(col)
-        document.getElementById(ai_location).style.backgroundColor = 'yellow'
-        if self.check_winner(self, 1):
+        elif self.check_winner(self, -1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'Player wins!'
+            return
+        elif self.check_winner(self, -1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'AI wins!'
+            return
+        elif self.check_winner(self, 1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'AI wins!'
+            return
+        
+        row = self.play_move(player, 1)
+        location = 'cell'+str(row)+'1'
+        document.getElementById(location).style.backgroundColor = 'yellow'
+        
+        if self.user_starts:
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), False, -1)
+            row = self.play_move(-1, col)
+        else: 
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True, 1)
+            row = self.play_move(1, col)
+        
+        ai_location = 'cell'+str(row)+str(col)
+        document.getElementById(ai_location).style.backgroundColor = 'red'
+        if self.check_winner(self, player):
+            document.getElementById('winner').innerText = 'Player wins!'
             return
         
     def insert2(self, event):
-        if self.check_winner(self, 1):
-            document.getElementById('winner').innerText = 'AI wins!'
+        if self.user_starts is None:
             return
-        elif self.check_winner(self, -1):
+        
+        if self.user_starts:
+            player = 1
+        else:
+            player = -1
+        
+        if self.check_winner(self, 1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'Player wins!'
             return
-        row = self.play_move(-1, 2)
-        location = 'cell'+str(row)+'2'
-        document.getElementById(location).style.backgroundColor = 'red'
-        
-        (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True)
-        row = self.play_move(1, col)
-        ai_location = 'cell'+str(row)+str(col)
-        document.getElementById(ai_location).style.backgroundColor = 'yellow'
-        if self.check_winner(self, 1):
+        elif self.check_winner(self, -1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'Player wins!'
+            return
+        elif self.check_winner(self, -1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'AI wins!'
+            return
+        elif self.check_winner(self, 1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'AI wins!'
+            return
+        
+        row = self.play_move(player, 2)
+        location = 'cell'+str(row)+'2'
+        document.getElementById(location).style.backgroundColor = 'yellow'
+        
+        if self.user_starts:
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), False, -1)
+            row = self.play_move(-1, col)
+        else: 
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True, 1)
+            row = self.play_move(1, col)
+        
+        ai_location = 'cell'+str(row)+str(col)
+        document.getElementById(ai_location).style.backgroundColor = 'red'
+        if self.check_winner(self, player):
+            document.getElementById('winner').innerText = 'Player wins!'
             return
         
     def insert3(self, event):
-        if self.check_winner(self, 1):
-            document.getElementById('winner').innerText = 'AI wins!'
+        if self.user_starts is None:
             return
-        elif self.check_winner(self, -1):
+        
+        if self.user_starts:
+            player = 1
+        else:
+            player = -1
+        
+        if self.check_winner(self, 1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'Player wins!'
             return
-        row = self.play_move(-1, 3)
-        location = 'cell'+str(row)+'3'
-        document.getElementById(location).style.backgroundColor = 'red'
-        
-        (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True)
-        row = self.play_move(1, col)
-        ai_location = 'cell'+str(row)+str(col)
-        document.getElementById(ai_location).style.backgroundColor = 'yellow'
-        if self.check_winner(self, 1):
+        elif self.check_winner(self, -1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'Player wins!'
+            return
+        elif self.check_winner(self, -1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'AI wins!'
+            return
+        elif self.check_winner(self, 1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'AI wins!'
+            return
+        
+        row = self.play_move(player, 3)
+        location = 'cell'+str(row)+'3'
+        document.getElementById(location).style.backgroundColor = 'yellow'
+        
+        if self.user_starts:
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), False, -1)
+            row = self.play_move(-1, col)
+        else: 
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True, 1)
+            row = self.play_move(1, col)
+        
+        ai_location = 'cell'+str(row)+str(col)
+        document.getElementById(ai_location).style.backgroundColor = 'red'
+        if self.check_winner(self, player):
+            document.getElementById('winner').innerText = 'Player wins!'
             return
         
     def insert4(self, event):
-        if self.check_winner(self, 1):
-            document.getElementById('winner').innerText = 'AI wins!'
+        if self.user_starts is None:
             return
-        elif self.check_winner(self, -1):
+        
+        if self.user_starts:
+            player = 1
+        else:
+            player = -1
+        
+        if self.check_winner(self, 1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'Player wins!'
             return
-        row = self.play_move(-1, 4)
-        location = 'cell'+str(row)+'4'
-        document.getElementById(location).style.backgroundColor = 'red'
-        
-        (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True)
-        row = self.play_move(1, col)
-        ai_location = 'cell'+str(row)+str(col)
-        document.getElementById(ai_location).style.backgroundColor = 'yellow'
-        if self.check_winner(self, 1):
+        elif self.check_winner(self, -1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'Player wins!'
+            return
+        elif self.check_winner(self, -1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'AI wins!'
+            return
+        elif self.check_winner(self, 1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'AI wins!'
+            return
+        
+        row = self.play_move(player, 4)
+        location = 'cell'+str(row)+'4'
+        document.getElementById(location).style.backgroundColor = 'yellow'
+        
+        if self.user_starts:
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), False, -1)
+            row = self.play_move(-1, col)
+        else: 
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True, 1)
+            row = self.play_move(1, col)
+        
+        ai_location = 'cell'+str(row)+str(col)
+        document.getElementById(ai_location).style.backgroundColor = 'red'
+        if self.check_winner(self, player):
+            document.getElementById('winner').innerText = 'Player wins!'
             return
         
     def insert5(self, event):
-        if self.check_winner(self, 1):
-            document.getElementById('winner').innerText = 'AI wins!'
+        if self.user_starts is None:
             return
-        elif self.check_winner(self, -1):
+        
+        if self.user_starts:
+            player = 1
+        else:
+            player = -1
+        
+        if self.check_winner(self, 1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'Player wins!'
             return
-        row = self.play_move(-1, 5)
-        location = 'cell'+str(row)+'5'
-        document.getElementById(location).style.backgroundColor = 'red'
-        
-        (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True)
-        row = self.play_move(1, col)
-        ai_location = 'cell'+str(row)+str(col)
-        document.getElementById(ai_location).style.backgroundColor = 'yellow'
-        if self.check_winner(self, 1):
+        elif self.check_winner(self, -1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'Player wins!'
+            return
+        elif self.check_winner(self, -1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'AI wins!'
+            return
+        elif self.check_winner(self, 1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'AI wins!'
+            return
+        
+        row = self.play_move(player, 5)
+        location = 'cell'+str(row)+'5'
+        document.getElementById(location).style.backgroundColor = 'yellow'
+        
+        if self.user_starts:
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), False, -1)
+            row = self.play_move(-1, col)
+        else: 
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True, 1)
+            row = self.play_move(1, col)
+        
+        ai_location = 'cell'+str(row)+str(col)
+        document.getElementById(ai_location).style.backgroundColor = 'red'
+        if self.check_winner(self, player):
+            document.getElementById('winner').innerText = 'Player wins!'
             return
         
     def insert6(self, event):
-        if self.check_winner(self, 1):
-            document.getElementById('winner').innerText = 'AI wins!'
+        if self.user_starts is None:
             return
-        elif self.check_winner(self, -1):
+        
+        if self.user_starts:
+            player = 1
+        else:
+            player = -1
+        
+        if self.check_winner(self, 1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'Player wins!'
             return
-        row = self.play_move(-1, 6)
-        location = 'cell'+str(row)+'6'
-        document.getElementById(location).style.backgroundColor = 'red'
-        
-        (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True)
-        row = self.play_move(1, col)
-        ai_location = 'cell'+str(row)+str(col)
-        document.getElementById(ai_location).style.backgroundColor = 'yellow'
-        if self.check_winner(self, 1):
+        elif self.check_winner(self, -1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'Player wins!'
+            return
+        elif self.check_winner(self, -1) and self.user_starts is True:
             document.getElementById('winner').innerText = 'AI wins!'
             return
-
-def alphabeta(board, depth, alpha, beta, maximizingPlayer):
-    if maximizingPlayer:
-        player = 1
-    else:
-        player = -1
+        elif self.check_winner(self, 1) and self.user_starts is False:
+            document.getElementById('winner').innerText = 'AI wins!'
+            return
         
+        row = self.play_move(player, 6)
+        location = 'cell'+str(row)+'6'
+        document.getElementById(location).style.backgroundColor = 'yellow'
+        
+        if self.user_starts:
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), False, -1)
+            row = self.play_move(-1, col)
+        else: 
+            (col, score) = alphabeta(self, 4, float('-inf'), float('inf'), True, 1)
+            row = self.play_move(1, col)
+        
+        ai_location = 'cell'+str(row)+str(col)
+        document.getElementById(ai_location).style.backgroundColor = 'red'
+        if self.check_winner(self, player):
+            document.getElementById('winner').innerText = 'Player wins!'
+            return
+
+def alphabeta(board, depth, alpha, beta, maximizingPlayer, player):    
     if depth == 0 or board.is_end():
         score = heuristic(board, player)
         return (None, score)
@@ -244,10 +371,10 @@ def alphabeta(board, depth, alpha, beta, maximizingPlayer):
         
         for action in board.get_valid_actions():
             temp = board.deep_copy()
-            temp.play_move(player, action)
+            temp.play_move(abs(player), action)
             
-            _ , new_score = alphabeta(temp, depth-1, alpha, beta, False)
-             
+            _ , new_score = alphabeta(temp, depth-1, alpha, beta, False, player)
+            
 #           maximzing score
             if new_score > value:
                 value = new_score
@@ -263,10 +390,10 @@ def alphabeta(board, depth, alpha, beta, maximizingPlayer):
 
         for action in board.get_valid_actions():
             temp = board.deep_copy()
-            temp.play_move(player, action)
+            temp.play_move(-abs(player), action)
 
-            _, new_score = alphabeta(temp, depth-1, alpha, beta,  True)
-                         
+            _, new_score = alphabeta(temp, depth-1, alpha, beta,  True, player)
+                                     
             # minimizing score
             if new_score < value:
                 value = new_score
@@ -294,14 +421,16 @@ def heuristic(game, player):
             elif (np.all(board[i,num:num+4]==player)):
                   score = 10000
             elif ((board[i,num:num+4] == player).sum() == 3) and ((board[i,num:num+4] == 0).sum() == 1):
-                  score += 10       
+                  score += 11       
             elif ((board[i,num:num+4] == player).sum() == 2) and ((board[i,num:num+4] == 0).sum() == 2):
                   score += 1              
             elif ((board[i,num:num+4] == -player).sum() == 1):
                   score += 0
             # If opponent has 3 in a row
-            if ((board[i,num:num+4] == -player).sum() == 3):
-                  score -= 5
+            if ((board[i,num:num+4] == -player).sum() == 4):
+                  score -= 1000
+            elif ((board[i,num:num+4] == -player).sum() == 3):
+                  score -= 10
     # Vertical
     for i in range(num_cols):
         for num in range(3):
@@ -310,14 +439,16 @@ def heuristic(game, player):
             elif (np.all(board[num:num+4,i]==player)):
                   score = 10000
             elif ((board[num:num+4,i] == player).sum() == 3) and ((board[num:num+4,i] == 0).sum() == 1):
-                  score += 10        
+                  score += 11      
             elif ((board[num:num+4,i] == player).sum() == 2) and ((board[num:num+4,i] == 0).sum() == 2):
                   score += 1              
             elif ((board[num:num+4,i] == -player).sum() == 1):
                   score += 0
             # If opponent has 3 in a row
-            if ((board[num:num+4,i] == -player).sum() == 3):
-                score -= 5
+            if ((board[num:num+4,i] == -player).sum() == 4):
+                score -= 1000
+            elif ((board[num:num+4,i] == -player).sum() == 3):
+                score -= 10
     # Positive diagonal
     for i in range(num_rows-3):
         for j in range(3, num_cols):
@@ -330,14 +461,16 @@ def heuristic(game, player):
                 if (board[i+1, j-1]==player) and (board[i+1, j-2]==player) and (board[i+1, j-3]==player):
                     score += 100
                 else:
-                    score += 10             
+                    score += 11           
             elif ((diagonal == player).sum() == 2) and ((diagonal == 0).sum() == 2):
                   score += 1             
             elif ((diagonal == -player).sum() == 1):
                   score += 0
             # If opponent has 3 in a row            
-            if ((diagonal == -player).sum() == 3):
-                score -= 5
+            if ((diagonal == -player).sum() == 4):
+                score -= 1000
+            elif ((diagonal == -player).sum() == 3):
+                score -= 10
                 
     # Negative diagonal
     for i in range(num_rows-3):
@@ -351,15 +484,18 @@ def heuristic(game, player):
                 if (board[i+1, j+1]==player) and (board[i+1, j+2]==player) and (board[i+1, j+3]==player):
                     score += 100
                 else:
-                    score += 10
+                    score += 11
                     
             elif ((diagonal == player).sum() == 2) and ((diagonal == 0).sum() == 2):
                   score += 1             
             elif ((diagonal == -player).sum() == 1):
                   score += 0
             # If opponent has 3 in a row
-            if ((diagonal == -player).sum() == 3):
-                score -= 5
-    return score
+            if ((diagonal == -player).sum() == 4):
+                score -= 1000
+            elif ((diagonal == -player).sum() == 3):
+                score -= 10
+
+    return player*score
     
 GAME = connect4_board()
