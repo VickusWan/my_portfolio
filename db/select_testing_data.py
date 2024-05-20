@@ -19,6 +19,20 @@ db_params = {
     'database': url_parts.path[1:],  # Remove the leading '/'
 }
 
+# def get_testing_data_pandas(champion, col_names):
+#     base_dir = os.path.dirname(os.path.abspath(__file__))
+#     aram_data = pd.read_csv('../aram_only_data.csv')
+#     champinfo = pd.read_csv('../champinfo.csv')
+#     poke = pd.read_csv('../cbamp_pokes.csv')
+    
+#     merged_df = aram_data \
+#         .merge(champinfo[['champ_key', 'class', 'difficulty']], left_on='champId_p1', right_on='champ_key', how='left') \
+#         .merge(poke[['Champ', 'total', 'hard CC']], left_on='champId_p1', right_on='champ_name', how='left')
+        
+        
+#     result_df = merged_df.loc[merged_df['champId_p1'] == champion, 
+#                               ['champId_p1', 'class', 'difficulty', 'total', 'hard CC']]
+#     return result_df
 
 def get_testing_data(champion, col_names):
     connection = psycopg2.connect(**db_params)

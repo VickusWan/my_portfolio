@@ -22,10 +22,10 @@ db_params = {
 connection = psycopg2.connect(**db_params)
 
 select_query = f'''
-SELECT * from champinfo;
+SELECT * from poke;
 '''
 
 df = pd.read_sql_query(select_query, connection)
 connection.close()
 
-df.to_csv("/mnt/c/Users/victo/OneDrive/Desktop/my_portfolio/champinfo.csv")
+df.to_csv("/mnt/c/Users/victo/OneDrive/Desktop/my_portfolio/poke.csv")
