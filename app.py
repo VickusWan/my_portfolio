@@ -28,7 +28,16 @@ def home():
 
 @app.route('/league')
 def league():
-    champ_data = champinfo.query.with_entities(champinfo.champ_name, champinfo.image).all()
+    # champ_data = champinfo.query.with_entities(champinfo.champ_name, champinfo.image).all()
+    # print(type(champ_data))
+    # print(champ_data)
+
+    df = pd.read_csv('champinfo.csv')
+    champ_data = []
+    
+    for i in df[['champ_name', 'image']].iterrows():
+        champ_data.append((i[1]['champ_name'], i[1]['image']))
+    print(champ_data)
     return render_template('league.html', data=champ_data, value = '---', pics=None, champs=None)
 
 @app.route('/nba')
@@ -49,7 +58,12 @@ def handle_submit():
     png_files = selected_value.getlist('dynamicDropdown')
     #summonerName = selected_value.getlist('summonername')
     
-    champ_data = champinfo.query.with_entities(champinfo.champ_name, champinfo.image).all()
+    # champ_data = champinfo.query.with_entities(champinfo.champ_name, champinfo.image).all()
+    df = pd.read_csv('champinfo.csv')
+    champ_data = []
+    
+    for i in df[['champ_name', 'image']].iterrows():
+        champ_data.append((i[1]['champ_name'], i[1]['image']))
     final_values = [i.replace('.png', '') for i in png_files]
     
     for i in range(len(final_values)):

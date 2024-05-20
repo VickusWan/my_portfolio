@@ -19,6 +19,7 @@ db_params = {
     'database': url_parts.path[1:],  # Remove the leading '/'
 }
 
+
 def get_testing_data(champion, col_names):
     connection = psycopg2.connect(**db_params)
     
